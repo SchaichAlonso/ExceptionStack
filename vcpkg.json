@@ -1,0 +1,11 @@
+{
+  "name": "exceptions",
+  "version-string": "0.0.1",
+  "dependencies": [
+    {
+      "name": "qtbase",
+      "default-features": false,
+      "features": ["concurrent", "testlib"]
+    }
+  ]
+}
