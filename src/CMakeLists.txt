@@ -23,7 +23,7 @@ target_sources(Exceptions PUBLIC
         main/cxx/Exceptions/RuntimeException
         main/cxx/Exceptions/RuntimeException.hpp
     BASE_DIRS
-        ${PROJECT_SOURCE_DIR}
+        ${PROJECT_SOURCE_DIR}/main/cxx
 )
 target_sources(Exceptions PRIVATE
     main/cxx/Exceptions/IndexOutOfBoundsException.cpp
