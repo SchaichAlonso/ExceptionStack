@@ -4,7 +4,7 @@ find_package(Qt6Concurrent CONFIG REQUIRED)
 find_package(Qt6Core CONFIG REQUIRED)
 qt_standard_project_setup()
 
-add_library(Exceptions SHARED)
+add_library(Exceptions)
 target_sources(Exceptions PUBLIC
     FILE_SET public_headers
     TYPE HEADERS
@@ -34,7 +34,7 @@ target_sources(Exceptions PRIVATE
     main/cxx/Exceptions/RuntimeException.cpp
 )
 
-target_compile_definitions(Exceptions PRIVATE ExceptionsAPI_DLLEXPORT INTERFACE ExceptionsAPI_DLLIMPORT)
+target_compile_definitions(Exceptions PRIVATE ExceptionsAPI_$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,,NO_>DLLEXPORT INTERFACE ExceptionsAPI_$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,,NO_>DLLIMPORT)
 target_include_directories(Exceptions INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/main/cxx> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/>)
 target_link_libraries(Exceptions PUBLIC Qt::Core Qt::Concurrent)
 set_target_properties(Exceptions PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY})
