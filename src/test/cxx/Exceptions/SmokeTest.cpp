@@ -35,6 +35,7 @@ int SmokeTest::throwFileNotFound()
 void SmokeTest::fileNotFound()
 {
     QVERIFY_THROWS_EXCEPTION(FileNotFoundException, throwFileNotFound());
+    QVERIFY_THROWS_EXCEPTION(std::exception, QtConcurrent::run(throwFileNotFound).result());
     QVERIFY_THROWS_EXCEPTION(IOException, QtConcurrent::run(throwFileNotFound).result());
     QVERIFY_THROWS_EXCEPTION(FileNotFoundException, QtConcurrent::run(throwFileNotFound).result());
 
@@ -59,6 +60,7 @@ int SmokeTest::throwRuntimeException()
 void SmokeTest::runtimeException()
 {
     QVERIFY_THROWS_EXCEPTION(RuntimeException, throwRuntimeException());
+    QVERIFY_THROWS_EXCEPTION(std::exception, QtConcurrent::run(throwRuntimeException).result());
     QVERIFY_THROWS_EXCEPTION(RuntimeException, QtConcurrent::run(throwRuntimeException).result());
 
     QString message;
@@ -82,6 +84,7 @@ int SmokeTest::throwIllegalArgumentException()
 void SmokeTest::illegalArgumentException()
 {
     QVERIFY_THROWS_EXCEPTION(IllegalArgumentException, throwIllegalArgumentException());
+    QVERIFY_THROWS_EXCEPTION(std::exception, QtConcurrent::run(throwIllegalArgumentException).result());
     QVERIFY_THROWS_EXCEPTION(RuntimeException, QtConcurrent::run(throwIllegalArgumentException).result());
     QVERIFY_THROWS_EXCEPTION(IllegalArgumentException, QtConcurrent::run(throwIllegalArgumentException).result());
 
@@ -106,6 +109,7 @@ int SmokeTest::throwIndexOutOfBoundsException()
 void SmokeTest::indexOufOfBoundsException()
 {
     QVERIFY_THROWS_EXCEPTION(IndexOutOfBoundsException, throwIndexOutOfBoundsException());
+    QVERIFY_THROWS_EXCEPTION(std::exception, QtConcurrent::run(throwIndexOutOfBoundsException).result());
     QVERIFY_THROWS_EXCEPTION(RuntimeException, QtConcurrent::run(throwIndexOutOfBoundsException).result());
     QVERIFY_THROWS_EXCEPTION(IndexOutOfBoundsException, QtConcurrent::run(throwIndexOutOfBoundsException).result());
 
@@ -130,6 +134,7 @@ int SmokeTest::throwNullPointerException()
 void SmokeTest::nullPointerException()
 {
     QVERIFY_THROWS_EXCEPTION(NullPointerException, throwNullPointerException());
+    QVERIFY_THROWS_EXCEPTION(std::exception, QtConcurrent::run(throwNullPointerException).result());
     QVERIFY_THROWS_EXCEPTION(RuntimeException, QtConcurrent::run(throwNullPointerException).result());
     QVERIFY_THROWS_EXCEPTION(NullPointerException, QtConcurrent::run(throwNullPointerException).result());
 }
