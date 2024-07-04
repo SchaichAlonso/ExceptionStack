@@ -37,7 +37,7 @@ target_sources(Exceptions PRIVATE
 target_compile_definitions(Exceptions PRIVATE ExceptionsAPI_$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,,NO_>DLLEXPORT INTERFACE ExceptionsAPI_$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,,NO_>DLLIMPORT)
 target_include_directories(Exceptions INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/main/cxx> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/>)
 target_link_libraries(Exceptions PUBLIC Qt::Core Qt::Concurrent)
-set_target_properties(Exceptions PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY})
+# set_target_properties(Exceptions PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY})
 
 install(
     TARGETS Exceptions
