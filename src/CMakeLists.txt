@@ -37,7 +37,7 @@ target_sources(Exceptions PRIVATE
 target_compile_definitions(Exceptions PRIVATE ExceptionsAPI_$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,,NO_>DLLEXPORT INTERFACE ExceptionsAPI_$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,,NO_>DLLIMPORT)
 target_include_directories(Exceptions INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/main/cxx> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/>)
 target_link_libraries(Exceptions PUBLIC Qt::Core Qt::Concurrent)
-set_target_properties(Exceptions PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY})
+set_target_properties(Exceptions PROPERTIES MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,DLL,>)
 
 install(
     TARGETS Exceptions
@@ -50,6 +50,7 @@ if (DEFINED WITH_TESTS)
     
     add_executable(${CMAKE_PROJECT_NAME}Test)
     target_sources(${CMAKE_PROJECT_NAME}Test PRIVATE test/cxx/Exceptions/SmokeTest.cpp)
+    set_target_properties(${CMAKE_PROJECT_NAME}Test PROPERTIES MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,DLL,>)
     target_link_libraries(${CMAKE_PROJECT_NAME}Test Qt::Concurrent Qt::Core Qt::Test Exceptions)
     add_test(NAME ${CMAKE_PROJECT_NAME}Test COMMAND ${CMAKE_PROJECT_NAME}Test -v2 -junitxml)
     if (DEFINED _VCPKG_INSTALLED_DIR)

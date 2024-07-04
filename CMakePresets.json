@@ -12,7 +12,7 @@
       "displayName": "Unit Tests",
       "description": "Enable Unit Test Compilation and Deployment",
       "cacheVariables": {
-        "EXCEPTIONS_UNITTESTS": "ON"
+        "WITH_TESTS": "ON"
       }
     },
     {
