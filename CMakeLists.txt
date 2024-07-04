@@ -5,7 +5,7 @@ cmake_policy(SET CMP0091 NEW)
 project(Exceptions
   VERSION 0.0.1
   DESCRIPTION "Exception Library"
-  HOMEPAGE_URL "https://github.com/SchaichAlonso/Exceptions"
+  HOMEPAGE_URL "https://github.com/SchaichAlonso/ExceptionStack"
   LANGUAGES CXX
 )
 
@@ -24,11 +24,11 @@ set(CMAKE_DEBUG_POSTFIX "d")
 
 add_subdirectory(src)
 
-install(EXPORT ${CMAKE_PROJECT_NAME}Targets DESTINATION share/${CMAKE_PROJECT_NAME})
+install(EXPORT ${CMAKE_PROJECT_NAME}Targets DESTINATION share/cmake/${CMAKE_PROJECT_NAME})
 
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
   "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake"
-  INSTALL_DESTINATION share/${CMAKE_PROJECT_NAME}
+  INSTALL_DESTINATION share/cmake/${CMAKE_PROJECT_NAME}
   NO_SET_AND_CHECK_MACRO
   NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
@@ -44,5 +44,5 @@ install(
     "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}ConfigVersion.cmake"
   DESTINATION
-    share/${CMAKE_PROJECT_NAME}
+    share/cmake/${CMAKE_PROJECT_NAME}
 )
