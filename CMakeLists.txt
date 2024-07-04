@@ -21,13 +21,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
-option(MSVC_RUNTIME_DYNAMIC "Use Dynamic MSVCRT" ON)
-if(MSVC_RUNTIME_DYNAMIC)
-  set(MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
-else()
-  set(MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-endif()
-
 add_subdirectory(src)
 
 install(EXPORT ${CMAKE_PROJECT_NAME}Targets DESTINATION share/${CMAKE_PROJECT_NAME})
