@@ -3,4 +3,4 @@
 	url = git@github.com:microsoft/vcpkg.git
 [submodule "vcpkg-overlay/triplets"]
 	path = vcpkg-overlay/triplets
-	url = git@github.com:SchaichAlonso/vcpkg-overlay-triplets.git
+	url = https://github.com/SchaichAlonso/vcpkg-overlay-triplets
