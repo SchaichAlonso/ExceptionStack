@@ -34,10 +34,43 @@ target_sources(Exceptions PRIVATE
     main/cxx/Exceptions/RuntimeException.cpp
 )
 
-target_compile_definitions(Exceptions PRIVATE ExceptionsAPI_$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,,NO_>DLLEXPORT INTERFACE ExceptionsAPI_$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,,NO_>DLLIMPORT)
-target_include_directories(Exceptions INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/main/cxx> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/>)
-target_link_libraries(Exceptions PUBLIC Qt::Core Qt::Concurrent)
-set_target_properties(Exceptions PROPERTIES MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,DLL,>)
+target_link_libraries(Exceptions
+    PUBLIC
+        Qt::Core
+        Qt::Concurrent
+)
+
+target_compile_features(Exceptions
+    PUBLIC
+        cxx_std_20
+)
+
+target_compile_definitions(Exceptions
+    INTERFACE
+        ExceptionsAPI_$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,,NO_>DLLIMPORT
+    PRIVATE
+        ExceptionsAPI_$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,,NO_>DLLEXPORT
+)
+
+target_include_directories(Exceptions
+    INTERFACE
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/main/cxx>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/>
+)
+
+set_target_properties(Exceptions
+    PROPERTIES
+        C_VISIBILITY_PRESET
+            hidden
+        CXX_VISIBILITY_PRESET
+            hidden
+        VISIBILITY_INLINES_HIDDEN
+            ON
+        MSVC_RUNTIME_LIBRARY
+            MultiThreaded$<$<CONFIG:Debug>:Debug>$<IF:$<STREQUAL:$<TARGET_PROPERTY:Exceptions,TYPE>,SHARED_LIBRARY>,DLL,>
+        DEBUG_POSTFIX
+            "d"
+)
 
 install(
     TARGETS Exceptions
